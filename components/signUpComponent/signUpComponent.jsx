@@ -12,7 +12,7 @@ import { useForm, Controller } from "react-hook-form";
 import ButtonComponent from "../../ui/ButtonComponent";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function signUpComponent() {
+export default function signUpComponent({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
   const {
     control,
@@ -21,16 +21,18 @@ export default function signUpComponent() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Отправлено:", data);
+    console.log("Sent:", data);
   };
 
   return (
     <>
       <View style={styles.container}>
-        <Image
-          style={styles.arrowIcon}
-          source={require("../../assets/icons/arrowLeft.png")}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+          <Image
+            style={styles.arrowIcon}
+            source={require("../../assets/icons/arrowLeft.png")}
+          />
+        </TouchableOpacity>
         <View style={styles.modal}>
           <View style={styles.modalTitle}>
             <View style={styles.modalTitleIcon}>
@@ -137,7 +139,7 @@ export default function signUpComponent() {
                     <Icon
                       name={showPassword ? "eye" : "eye-off"}
                       size={24}
-                      color="gray"
+                      color="rgb(0, 163, 109)"
                     />
                   </TouchableOpacity>
                 </View>
@@ -161,6 +163,9 @@ export default function signUpComponent() {
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+  },
   arrowIcon: {
     marginLeft: 17,
     marginTop: 28,

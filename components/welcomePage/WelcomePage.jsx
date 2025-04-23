@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, Image, Button } from "react-native";
 import ButtonComponent from "../../ui/ButtonComponent";
 
-export default function WelcomePage() {
+export default function WelcomePage({ navigation }) {
   return (
     <>
       <View style={styles.imgWrapper}>
@@ -39,9 +39,16 @@ export default function WelcomePage() {
         </View>
       </View>
       <View style={styles.buttons}>
-        <Button title="Sign In" color="rgb(250, 138, 52);" /> // need to add
-        styles here
-        <ButtonComponent text="Sign Up" />
+        <Button
+          title="Sign In"
+          color="rgb(250, 138, 52);"
+          onPress={() => navigation.navigate("SignIn")}
+        />{" "}
+        // need to add styles here
+        <ButtonComponent
+          text="Sign Up"
+          onPress={() => navigation.navigate("SignUp")}
+        />
       </View>
       <View style={styles.background}>
         <Image
@@ -60,6 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 16,
     zIndex: 3,
+    paddingTop: 50,
   },
   logoImg: {
     width: 164,
