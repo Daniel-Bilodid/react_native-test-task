@@ -1,6 +1,9 @@
+import React from "react";
+
 import { StyleSheet, Text, View } from "react-native";
-import WelcomePage from "./components/welcomePage/WelcomePage";
+
 import SignUpComponent from "./components/signUpComponent/signUpComponent";
+
 export default function App() {
   return (
     <View style={styles.container}>

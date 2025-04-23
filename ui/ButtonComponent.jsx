@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export default function ButtonComponent({ text }) {
+export default function ButtonComponent({ text, onPress }) {
   return (
     <View style={styles.buttonWrapper}>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.text}>Sign Up</Text>
+      <TouchableOpacity style={styles.button} onPress={onPress}>
+        <Text style={styles.text}>{text}</Text>
       </TouchableOpacity>
     </View>
   );
