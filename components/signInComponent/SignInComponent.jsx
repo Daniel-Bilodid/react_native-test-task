@@ -11,6 +11,10 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import ButtonComponent from "../../ui/ButtonComponent";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import * as SecureStore from "expo-secure-store";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../store/authSlice";
+import { loginUser } from "../../api/auth";
 
 export default function SignInComponent({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,11 +22,28 @@ export default function SignInComponent({ navigation }) {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: { email: "", password: "" } });
+  const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    console.log("Sent:", data);
-  };
+  async function onSubmit({ email, password }) {
+    console.log("🔥 onSubmit called with", email, password);
+    try {
+      const username = email.split("@")[0];
+
+      const { data: res } = await loginUser({ username, password });
+      console.log("✅ API login response:", res);
+
+      await SecureStore.setItemAsync("userId", res.id.toString());
+      await SecureStore.setItemAsync("token", res.accessToken);
+
+      dispatch(setCredentials({ user: res, token: res.accessToken }));
+      navigation.replace("PinCode");
+    } catch (e) {
+      console.log("⚠️ Ошибка логина", e);
+      Alert.alert("Ошибка логина", e.message);
+    }
+  }
+
   return (
     <>
       <View style={styles.container}>

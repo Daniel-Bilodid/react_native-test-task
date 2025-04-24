@@ -11,17 +11,33 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import ButtonComponent from "../../ui/ButtonComponent";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import * as Keychain from "react-native-keychain";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../store/authSlice";
+import { registerUser } from "../../api/auth";
 
 export default function signUpComponent({ navigation }) {
-  const [showPassword, setShowPassword] = useState(false);
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: { name: "", email: "", password: "" } });
+  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log("Sent:", data);
+  const onSubmit = async (data) => {
+    try {
+      const res = await registerUser(data);
+      const { id, token } = res.data;
+      // Save JWT token to Keychain
+      await Keychain.setGenericPassword(id.toString(), token);
+      // Save to Redux
+      dispatch(setCredentials({ user: res.data, token }));
+      // Navigate to PIN setup
+      navigation.replace("PinCode");
+    } catch (err) {
+      console.warn("Registration error", err);
+    }
   };
 
   return (

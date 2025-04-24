@@ -3,14 +3,19 @@ import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 
 import NavComponent from "../navComponent/NavComponent";
 import PostsComponent from "../postsComponent/PostsComponent";
+import { useSelector } from "react-redux";
 
 export default function HomePage() {
+  const user = useSelector((state) => state.auth.user);
   return (
     <>
       <ScrollView style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Your name</Text>
-          <Text style={styles.headerTitleName}>Jhon doe</Text>
+          <Text style={styles.headerTitleName}>
+            {user.firstName}
+            {user.lastName}
+          </Text>
         </View>
 
         <View style={styles.task}>
