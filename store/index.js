@@ -5,25 +5,27 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import authReducer from "../store/authSlice";
 import settingsReducer from "../store/settingsSlice";
 
-const rootReducer = combineReducers({
-  auth: authReducer,
-  settings: settingsReducer,
-});
-
-const persistConfig = {
-  key: "root",
+const authPersistConfig = {
+  key: "auth",
   storage: AsyncStorage,
-  whitelist: ["auth", "settings"],
+  whitelist: ["user", "token"],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const settingsPersistConfig = {
+  key: "settings",
+  storage: AsyncStorage,
+  whitelist: ["language", "profile"],
+};
+
+const rootReducer = combineReducers({
+  auth: persistReducer(authPersistConfig, authReducer),
+  settings: persistReducer(settingsPersistConfig, settingsReducer),
+});
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export const persistor = persistStore(store);

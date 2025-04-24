@@ -39,8 +39,7 @@ export default function SignInComponent({ navigation }) {
       dispatch(setCredentials({ user: res, token: res.accessToken }));
       navigation.replace("PinCode");
     } catch (e) {
-      console.log("⚠️ Ошибка логина", e);
-      Alert.alert("Ошибка логина", e.message);
+      Alert.alert("Error", e.message);
     }
   }
 

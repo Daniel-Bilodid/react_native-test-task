@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/authSlice";
 import { registerUser } from "../../api/auth";
 
-export default function signUpComponent({ navigation }) {
+export default function SignUpComponent({ navigation }) {
   const {
     control,
     handleSubmit,
@@ -29,11 +29,11 @@ export default function signUpComponent({ navigation }) {
     try {
       const res = await registerUser(data);
       const { id, token } = res.data;
-      // Save JWT token to Keychain
+
       await Keychain.setGenericPassword(id.toString(), token);
-      // Save to Redux
+
       dispatch(setCredentials({ user: res.data, token }));
-      // Navigate to PIN setup
+
       navigation.replace("PinCode");
     } catch (err) {
       console.warn("Registration error", err);

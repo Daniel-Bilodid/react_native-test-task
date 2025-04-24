@@ -3,21 +3,22 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   token: null,
-  pinSet: null,
+  pinSet: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCredentials: (state, { payload: { user, token } }) => {
+    setCredentials: (state, action) => {
+      const { user, token } = action.payload;
       state.user = user;
       state.token = token;
     },
-    setPin: (state) => {
-      state.pinSet = true;
+    setPin: (state, action) => {
+      state.pinSet = action.payload;
     },
-    logout: (state) => {
+    clearAuth: (state) => {
       state.user = null;
       state.token = null;
       state.pinSet = false;
@@ -25,5 +26,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, setPin, logout } = authSlice.actions;
+export const { setCredentials, setPin, clearAuth } = authSlice.actions;
 export default authSlice.reducer;
