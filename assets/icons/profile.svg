@@ -1,0 +1,14 @@
+<svg width="27.000000" height="27.000000" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip8_948">
+			<rect id="Icons/24/briefcase" rx="0.000000" width="25.875000" height="25.875000" transform="translate(0.562500 0.562500)" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip8_948)">
+		<path id="Vector 6" d="M4.41 23.13L4.53 22.35C4.77 20.82 5.69 19.47 7.14 18.91C8.72 18.3 10.97 17.65 13.36 17.65C15.76 17.65 18.01 18.3 19.59 18.91C21.04 19.47 21.96 20.82 22.2 22.35L22.32 23.13" stroke="#606773" stroke-opacity="1.000000" stroke-width="1.687500" stroke-linejoin="round" stroke-linecap="round"/>
+		<path id="Vector" d="M13.36 13.67C10.62 13.67 8.39 11.45 8.39 8.7C8.39 5.95 10.62 3.72 13.36 3.72C16.11 3.72 18.34 5.95 18.34 8.7C18.34 11.45 16.11 13.67 13.36 13.67Z" stroke="#606773" stroke-opacity="1.000000" stroke-width="1.687500" stroke-linejoin="round"/>
+	</g>
+</svg>

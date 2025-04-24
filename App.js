@@ -8,13 +8,15 @@ import WelcomePage from "./components/welcomePage/WelcomePage";
 import SignUpComponent from "./components/signUpComponent/signUpComponent";
 import SignInComponent from "./components/signInComponent/SignInComponent";
 import HomePage from "./components/homePage/HomePage";
+import PostPage from "./components/postPage/PostPage";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <HomePage />
+      {/* <HomePage /> */}
+      <PostPage />
       {/* <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
