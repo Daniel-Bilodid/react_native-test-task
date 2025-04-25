@@ -3,9 +3,9 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   Alert,
   Image,
+  StyleSheet,
 } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,7 @@ import { setPin } from "../../store/authSlice";
 import ButtonComponent from "../../ui/ButtonComponent";
 import { useTranslation } from "react-i18next";
 
-export default function PinCodeScreen({ navigation }) {
+export default function PinCodeScreen() {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -27,12 +27,6 @@ export default function PinCodeScreen({ navigation }) {
       setHasPin(!!storedPin);
     })();
   }, []);
-
-  //   useEffect(() => {
-  //     if (pin.length === 6) {
-  //       handleCompletePin(pin.join(""));
-  //     }
-  //   }, [pin]);
 
   const handleCompletePin = async (value) => {
     if (hasPin) {

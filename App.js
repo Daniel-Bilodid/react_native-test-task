@@ -6,17 +6,16 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
 import InitAuth from "./components/InitAuth/InitAuth";
+import { NavigationContainer } from "@react-navigation/native";
 import MainApp from "./Main";
 
 export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <InitAuth>
-          <View style={styles.container}>
-            <MainApp />
-          </View>
-        </InitAuth>
+        <NavigationContainer>
+          <MainApp />
+        </NavigationContainer>
       </PersistGate>
     </Provider>
   );

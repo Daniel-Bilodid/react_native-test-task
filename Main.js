@@ -16,7 +16,7 @@ import LanguagePage from "./components/languagePage/LanguagePage";
 
 const Stack = createNativeStackNavigator();
 
-export default function MainApp() {
+export default function Main() {
   const { i18n } = useTranslation();
   const lang = useSelector((state) => state.settings.language);
   const { token, pinSet } = useSelector((state) => state.auth);
@@ -29,35 +29,29 @@ export default function MainApp() {
 
   if (!token) {
     return (
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Welcome" component={WelcomePage} />
-          <Stack.Screen name="SignUp" component={SignUpComponent} />
-          <Stack.Screen name="SignIn" component={SignInComponent} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Welcome" component={WelcomePage} />
+        <Stack.Screen name="SignUp" component={SignUpComponent} />
+        <Stack.Screen name="SignIn" component={SignInComponent} />
+      </Stack.Navigator>
     );
   }
 
   if (!pinSet) {
     return (
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="PinCode" component={PinCodeScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="PinCode" component={PinCodeScreen} />
+      </Stack.Navigator>
     );
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="Post" component={PostPage} />
-        <Stack.Screen name="PostSearch" component={PostSearchPage} />
-        <Stack.Screen name="Profile" component={ProfilePage} />
-        <Stack.Screen name="Language" component={LanguagePage} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={HomePage} />
+      <Stack.Screen name="Post" component={PostPage} />
+      <Stack.Screen name="PostSearch" component={PostSearchPage} />
+      <Stack.Screen name="Profile" component={ProfilePage} />
+      <Stack.Screen name="Language" component={LanguagePage} />
+    </Stack.Navigator>
   );
 }

@@ -28,11 +28,7 @@ export default function SignInComponent({ navigation }) {
   async function onSubmit({ email, password }) {
     try {
       const username = email.split("@")[0];
-
       const { data: res } = await loginUser({ username, password });
-
-      await SecureStore.setItemAsync("userId", res.id.toString());
-      await SecureStore.setItemAsync("token", res.accessToken);
 
       dispatch(setCredentials({ user: res, token: res.accessToken }));
       navigation.replace("PinCode");
