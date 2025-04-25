@@ -8,9 +8,11 @@ import {
   ScrollView,
 } from "react-native";
 import ButtonComponent from "../../ui/ButtonComponent";
+import { useTranslation } from "react-i18next";
 
 export default function PostPage({ navigation, route }) {
   const { post } = route.params;
+  const { t } = useTranslation();
   console.log(post);
   return (
     <>
@@ -36,14 +38,14 @@ export default function PostPage({ navigation, route }) {
         </View>
 
         <View style={styles.about}>
-          <Text style={styles.aboutTitle}>About</Text>
+          <Text style={styles.aboutTitle}>{t("about")}</Text>
           <View style={styles.aboutTextWrapper}>
             <Text style={styles.aboutText}>{post.body}</Text>
           </View>
         </View>
 
         <View style={styles.comments}>
-          <Text style={styles.commentsTitle}>Comments</Text>
+          <Text style={styles.commentsTitle}>{t("comments")}</Text>
           <View style={styles.commentsWrapper}>
             <View style={styles.commentsCard}>
               <Text style={styles.commentsCardName}>Egor</Text>

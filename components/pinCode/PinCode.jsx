@@ -11,10 +11,12 @@ import * as SecureStore from "expo-secure-store";
 import { useDispatch, useSelector } from "react-redux";
 import { setPin } from "../../store/authSlice";
 import ButtonComponent from "../../ui/ButtonComponent";
+import { useTranslation } from "react-i18next";
 
 export default function PinCodeScreen({ navigation }) {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [hasPin, setHasPin] = useState(null);
   const [pin, setPinState] = useState([]);
@@ -66,7 +68,7 @@ export default function PinCodeScreen({ navigation }) {
           </View>
           <Text style={styles.emailText}>{user.email}</Text>
           <TouchableOpacity onPress={() => Alert.alert("Change account")}>
-            <Text style={styles.changeAccount}>Change Account</Text>
+            <Text style={styles.changeAccount}>{t("changeAccount")}</Text>
           </TouchableOpacity>
         </View>
       )}

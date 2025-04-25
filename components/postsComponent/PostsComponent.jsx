@@ -6,11 +6,13 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 
 export default function PostsComponent({ posts, navigation }) {
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
-      <Text style={styles.postsTitle}>Posts</Text>
+      <Text style={styles.postsTitle}>{t("posts")}</Text>
 
       <View style={styles.postsWrapper}>
         {posts.slice(0, 3).map((post) => (

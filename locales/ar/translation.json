@@ -19,6 +19,7 @@
   "set6DigitPin": "قم بتعيين رقم تعريف شخصي مكون من 6 أرقام",
   "continue": "استمر",
   "about": "حول",
+  "comments": "تعليقات",
   "posts": "المشاركات",
   "search": "بحث",
   "searchPostsPlaceholder": "ابحث في المشاركات...",
@@ -26,5 +27,7 @@
   "idLabel": "المعرف: ",
   "nameLabel": "الاسم: ",
   "settings": "الإعدادات",
-  "basic": "أساسي"
+  "basic": "أساسي",
+  "changeAccount": "تغيير الحساب",
+  "other": "آخر"
 }

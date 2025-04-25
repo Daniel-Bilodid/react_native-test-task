@@ -19,6 +19,7 @@
   "set6DigitPin": "Set a 6 digit PIN",
   "continue": "Continue",
   "about": "About",
+  "comments": "Comments",
   "posts": "Posts",
   "search": "Search",
   "searchPostsPlaceholder": "Search Posts...",
@@ -26,5 +27,7 @@
   "idLabel": "ID: ",
   "nameLabel": "Name: ",
   "settings": "Settings",
-  "basic": "Basic"
+  "basic": "Basic",
+  "changeAccount": "Change Account",
+  "other": "Other"
 }

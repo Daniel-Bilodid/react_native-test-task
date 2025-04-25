@@ -3,9 +3,11 @@ import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import NavComponent from "../navComponent/NavComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "../../store/postSlice";
+import { useTranslation } from "react-i18next";
 
 export default function PostSearchPage({ navigation }) {
   const [text, setText] = useState("");
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.items);
@@ -30,13 +32,13 @@ export default function PostSearchPage({ navigation }) {
   return (
     <>
       <ScrollView style={styles.container}>
-        <Text style={styles.title}>Search</Text>
+        <Text style={styles.title}>{t("search")}</Text>
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
             value={text}
             onChangeText={setText}
-            placeholder="Search Posts..."
+            placeholder={t("searchPostsPlaceholder")}
           />
 
           <View style={styles.postList}>

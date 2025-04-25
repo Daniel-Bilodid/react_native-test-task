@@ -4,15 +4,17 @@ import BackButton from "../../ui/BackButton";
 import { useSelector } from "react-redux";
 import NavComponent from "../navComponent/NavComponent";
 import LogoutButtonComponent from "../logoutButtonComponent/LogoutButtonComponent";
+import { useTranslation } from "react-i18next";
 
 export default function ProfilePage({ navigation }) {
   const user = useSelector((state) => state.auth.user);
+  const { t } = useTranslation();
   return (
     <>
       <View>
         <BackButton navigation={navigation} screen="Home" />
         <View style={styles.container}>
-          <Text style={styles.settingsTitle}>Settings</Text>
+          <Text style={styles.settingsTitle}>{t("settings")}</Text>
 
           <View style={styles.settingsItemBody}>
             <View style={styles.settingsProfileImg}></View>
@@ -21,18 +23,18 @@ export default function ProfilePage({ navigation }) {
               {user.lastName}
             </Text>
           </View>
-          <Text style={styles.settingsBasic}>Basic</Text>
+          <Text style={styles.settingsBasic}>{t("basic")}</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("Language")}
             style={styles.settingsSettingBody}
           >
             <View style={styles.settingsWrapper}>
               <Image source={require("../../assets/icons/globe.png")} />
-              <Text style={styles.settingsTitle}>Language</Text>
+              <Text style={styles.settingsTitle}>{t("Language")}</Text>
             </View>
             <Image source={require("../../assets/icons/arrowRightGray.png")} />
           </TouchableOpacity>
-          <Text style={styles.settingsOther}>Other</Text>
+          <Text style={styles.settingsOther}>{t("other")}</Text>
           <LogoutButtonComponent />
         </View>
       </View>
