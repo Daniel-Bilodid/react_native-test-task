@@ -13,6 +13,7 @@ import HomePage from "./components/homePage/HomePage";
 import PostPage from "./components/postPage/PostPage";
 import InitAuth from "./components/InitAuth/InitAuth";
 import PostSearchPage from "./components/postSearchPage/PostSearchPage";
+import ProfilePage from "./components/profilePage/ProfilePage";
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,7 @@ function AppNavigator() {
       <Stack.Screen name="Home" component={HomePage} />
       <Stack.Screen name="Post" component={PostPage} />
       <Stack.Screen name="PostSearch" component={PostSearchPage} />
+      <Stack.Screen name="Profile" component={ProfilePage} />
     </Stack.Navigator>
   );
 }

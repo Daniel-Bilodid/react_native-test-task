@@ -1,0 +1,114 @@
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import BackButton from "../../ui/BackButton";
+import { useSelector } from "react-redux";
+import NavComponent from "../navComponent/NavComponent";
+
+export default function ProfilePage({ navigation }) {
+  const user = useSelector((state) => state.auth.user);
+  return (
+    <>
+      <View>
+        <BackButton navigation={navigation} screen="Home" />
+        <View style={styles.container}>
+          <Text style={styles.settingsTitle}>Settings</Text>
+
+          <View style={styles.settingsItemBody}>
+            <View style={styles.settingsProfileImg}></View>
+            <Text style={styles.settingsTitle}>
+              {user.firstName}
+              {user.lastName}
+            </Text>
+          </View>
+          <Text style={styles.settingsBasic}>Basic</Text>
+          <View style={styles.settingsSettingBody}>
+            <View style={styles.settingsWrapper}>
+              <Image source={require("../../assets/icons/globe.png")} />
+              <Text style={styles.settingsTitle}>Language</Text>
+            </View>
+            <Image source={require("../../assets/icons/arrowRightGray.png")} />
+          </View>
+          <Text style={styles.settingsOther}>Other</Text>
+          <View style={styles.settingsSettingBody}>
+            <View style={styles.settingsWrapper}>
+              <Image source={require("../../assets/icons/logout.png")} />
+              <Text style={styles.settingsTitle}>Log Out</Text>
+            </View>
+
+            <Image source={require("../../assets/icons/arrowRightGray.png")} />
+          </View>
+        </View>
+      </View>
+      <NavComponent navigation={navigation} />
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
+  settingsTitle: {
+    color: "rgb(6, 7, 10)",
+    fontSize: 22,
+    fontWeight: 600,
+    lineHeight: 32,
+  },
+
+  settingsItemBody: {
+    width: "100%",
+    height: 80,
+    marginTop: 16,
+    borderRadius: 16,
+    borderWidth: 1,
+
+    paddingLeft: 15.5,
+
+    flexDirection: "row",
+
+    alignItems: "center",
+    gap: 13.5,
+    borderColor: "rgb(206, 213, 224)",
+  },
+  settingsProfileImg: {
+    width: 32,
+    height: 32,
+    backgroundColor: "rgb(235, 239, 245)",
+    borderRadius: 20,
+  },
+  settingsTitle: {
+    color: "rgb(6, 7, 10)",
+    fontSize: 15,
+    fontWeight: 500,
+    lineHeight: 24,
+  },
+  settingsWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+
+  settingsSettingBody: {
+    width: "100%",
+    height: 56,
+    marginTop: 16,
+    borderRadius: 16,
+    borderWidth: 1,
+
+    paddingLeft: 15.5,
+    paddingRight: 16,
+
+    flexDirection: "row",
+
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 13.5,
+    borderColor: "rgb(206, 213, 224)",
+  },
+  settingsBasic: {
+    marginTop: 32,
+  },
+  settingsOther: {
+    marginTop: 32,
+  },
+});

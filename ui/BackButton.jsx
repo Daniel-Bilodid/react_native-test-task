@@ -1,11 +1,11 @@
 import React from "react";
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
 
-export default function BackButton({ navigation, navigator }) {
+export default function BackButton({ navigation, screen }) {
   return (
     <TouchableOpacity
       style={styles.backButton}
-      onPress={() => navigation.navigate({ navigator })}
+      onPress={() => navigation.navigate(screen)}
     >
       <Image
         style={styles.backIcon}
@@ -14,12 +14,13 @@ export default function BackButton({ navigation, navigator }) {
     </TouchableOpacity>
   );
 }
+
 const styles = StyleSheet.create({
   backButton: {
-    position: "absolute",
-    top: 48,
-    left: 16,
+    marginTop: 56,
+    marginLeft: 16,
     padding: 8,
+    alignSelf: "flex-start",
     zIndex: 10,
   },
 });

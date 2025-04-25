@@ -5,7 +5,6 @@ import NavComponent from "../navComponent/NavComponent";
 import PostsComponent from "../postsComponent/PostsComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "../../store/postSlice";
-import { getPosts } from "../../api/posts";
 
 export default function HomePage({ navigation }) {
   const user = useSelector((state) => state.auth.user);
