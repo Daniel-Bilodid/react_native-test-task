@@ -25,11 +25,6 @@ export default function LogoutButtonComponent({ navigation }) {
       dispatch(clearAuth());
 
       await persistor.purge();
-
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "Welcome" }],
-      });
     } catch (e) {
       Alert.alert("Error", e.message);
     }

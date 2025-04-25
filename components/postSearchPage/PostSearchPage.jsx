@@ -4,6 +4,7 @@ import NavComponent from "../navComponent/NavComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "../../store/postSlice";
 import { useTranslation } from "react-i18next";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default function PostSearchPage({ navigation }) {
   const [text, setText] = useState("");
@@ -34,12 +35,21 @@ export default function PostSearchPage({ navigation }) {
       <ScrollView style={styles.container}>
         <Text style={styles.title}>{t("search")}</Text>
         <View style={styles.searchWrapper}>
-          <TextInput
-            style={styles.searchInput}
-            value={text}
-            onChangeText={setText}
-            placeholder={t("searchPostsPlaceholder")}
-          />
+          <View style={styles.searchContainer}>
+            <Icon
+              name="magnify"
+              size={24}
+              color="gray"
+              style={styles.searchIcon}
+            />
+            <TextInput
+              style={styles.searchInput}
+              value={text}
+              onChangeText={setText}
+              placeholder={t("searchPostsPlaceholder")}
+              placeholderTextColor="rgb(133, 140, 148)"
+            />
+          </View>
 
           <View style={styles.postList}>
             {filteredPosts.map((post) => (
@@ -75,14 +85,22 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
   },
-  searchInput: {
-    width: "100%",
-    height: 56,
-    borderRadius: 16,
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
-    padding: 16,
     borderColor: "rgb(206, 213, 224)",
+    borderRadius: 16,
+    height: 56,
+    paddingHorizontal: 16,
     marginTop: 16,
+  },
+  searchIcon: {
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,
+    height: "100%",
   },
   postList: {
     marginTop: 12,

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import BackButton from "../../ui/BackButton";
 import NavComponent from "../navComponent/NavComponent";
 import { setLanguage } from "../../store/settingsSlice";
@@ -22,33 +23,34 @@ export default function LanguagePage({ navigation }) {
     dispatch(setLanguage(lng));
   };
 
+  const renderOption = (lng, label) => {
+    const selected = lang === lng;
+    return (
+      <TouchableOpacity
+        style={styles.languageBody}
+        onPress={() => onSelect(lng)}
+        key={lng}
+      >
+        <View style={styles.languageWrapper}>
+          <View style={styles.languageTextWrapper}>
+            <Image source={require("../../assets/icons/globe.png")} />
+            <Text style={styles.languageItemTitle}>{t(label)}</Text>
+          </View>
+          <View style={[styles.checkbox, selected && styles.checkedBox]}>
+            {selected && <Icon name="check" size={20} color="white" />}
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <>
       <View style={styles.container}>
         <BackButton navigation={navigation} screen="Profile" />
         <Text style={styles.languageTitle}>{t("Language")}</Text>
-        <TouchableOpacity
-          style={styles.languageBody}
-          onPress={() => onSelect("en")}
-        >
-          <View style={styles.languageWrapper}>
-            <View
-              style={[styles.checkbox, lang === "en" && styles.checkedBox]}
-            />
-            <Text style={styles.languageItemTitle}>{t("English")}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.languageBody}
-          onPress={() => onSelect("ar")}
-        >
-          <View style={styles.languageWrapper}>
-            <View
-              style={[styles.checkbox, lang === "ar" && styles.checkedBox]}
-            />
-            <Text style={styles.languageItemTitle}>{t("Arabic")}</Text>
-          </View>
-        </TouchableOpacity>
+        {renderOption("en", "English")}
+        {renderOption("ar", "Arabic")}
       </View>
       <NavComponent navigation={navigation} />
     </>
@@ -83,7 +85,13 @@ const styles = StyleSheet.create({
   languageWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  languageTextWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 11,
   },
   languageItemTitle: {
     fontSize: 15,
@@ -92,12 +100,14 @@ const styles = StyleSheet.create({
     color: "rgb(6, 7, 10)",
   },
   checkbox: {
-    width: 20,
-    height: 20,
-    borderRadius: 4,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: "rgb(206, 213, 224)",
     backgroundColor: "transparent",
+    justifyContent: "center",
+    alignItems: "center",
   },
   checkedBox: {
     backgroundColor: "rgb(250, 138, 52)",
