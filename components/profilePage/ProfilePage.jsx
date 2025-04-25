@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import BackButton from "../../ui/BackButton";
 import { useSelector } from "react-redux";
 import NavComponent from "../navComponent/NavComponent";
+import LogoutButtonComponent from "../logoutButtonComponent/LogoutButtonComponent";
 
 export default function ProfilePage({ navigation }) {
   const user = useSelector((state) => state.auth.user);
@@ -21,22 +22,18 @@ export default function ProfilePage({ navigation }) {
             </Text>
           </View>
           <Text style={styles.settingsBasic}>Basic</Text>
-          <View style={styles.settingsSettingBody}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Language")}
+            style={styles.settingsSettingBody}
+          >
             <View style={styles.settingsWrapper}>
               <Image source={require("../../assets/icons/globe.png")} />
               <Text style={styles.settingsTitle}>Language</Text>
             </View>
             <Image source={require("../../assets/icons/arrowRightGray.png")} />
-          </View>
+          </TouchableOpacity>
           <Text style={styles.settingsOther}>Other</Text>
-          <View style={styles.settingsSettingBody}>
-            <View style={styles.settingsWrapper}>
-              <Image source={require("../../assets/icons/logout.png")} />
-              <Text style={styles.settingsTitle}>Log Out</Text>
-            </View>
-
-            <Image source={require("../../assets/icons/arrowRightGray.png")} />
-          </View>
+          <LogoutButtonComponent />
         </View>
       </View>
       <NavComponent navigation={navigation} />

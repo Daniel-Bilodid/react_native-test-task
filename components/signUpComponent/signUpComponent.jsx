@@ -11,7 +11,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import ButtonComponent from "../../ui/ButtonComponent";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import * as Keychain from "react-native-keychain";
+import * as SecureStore from "expo-secure-store";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/authSlice";
 import { registerUser } from "../../api/auth";
@@ -24,17 +24,16 @@ export default function SignUpComponent({ navigation }) {
   } = useForm({ defaultValues: { name: "", email: "", password: "" } });
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-
   const onSubmit = async (data) => {
     try {
       const res = await registerUser(data);
       const { id, token } = res.data;
 
-      await Keychain.setGenericPassword(id.toString(), token);
+      const creds = { user: res.data, token };
+      await SecureStore.setItemAsync("userCredentials", JSON.stringify(creds));
+      await SecureStore.setItemAsync("pinSet", "false");
 
-      dispatch(setCredentials({ user: res.data, token }));
-
-      navigation.replace("PinCode");
+      dispatch(setCredentials(creds));
     } catch (err) {
       console.warn("Registration error", err);
     }

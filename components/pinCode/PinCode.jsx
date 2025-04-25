@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPin } from "../../store/authSlice";
 import ButtonComponent from "../../ui/ButtonComponent";
 
-export default function PinCodeScreen() {
+export default function PinCodeScreen({ navigation }) {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 

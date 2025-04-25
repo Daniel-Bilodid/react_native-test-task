@@ -14,6 +14,7 @@ import PostPage from "./components/postPage/PostPage";
 import InitAuth from "./components/InitAuth/InitAuth";
 import PostSearchPage from "./components/postSearchPage/PostSearchPage";
 import ProfilePage from "./components/profilePage/ProfilePage";
+import LanguagePage from "./components/languagePage/LanguagePage";
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +61,7 @@ function AppNavigator() {
       <Stack.Screen name="Post" component={PostPage} />
       <Stack.Screen name="PostSearch" component={PostSearchPage} />
       <Stack.Screen name="Profile" component={ProfilePage} />
+      <Stack.Screen name="Language" component={LanguagePage} />
     </Stack.Navigator>
   );
 }
