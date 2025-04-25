@@ -9,12 +9,17 @@ import {
 } from "react-native";
 import ButtonComponent from "../../ui/ButtonComponent";
 
-export default function PostPage() {
+export default function PostPage({ navigation, route }) {
+  const { post } = route.params;
+  console.log(post);
   return (
     <>
       <ScrollView style={styles.container}>
         <View style={styles.postHeader}>
-          <TouchableOpacity style={styles.backButton} onPress={() => {}}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.navigate("Home")}
+          >
             <Image
               style={styles.backIcon}
               source={require("../../assets/icons/arrowLeft.png")}
@@ -22,7 +27,7 @@ export default function PostPage() {
           </TouchableOpacity>
 
           <View style={styles.titleWrapper}>
-            <Text style={styles.postTitle}>Post name</Text>
+            <Text style={styles.postTitle}>{post.title}</Text>
             <Image
               style={styles.postImg}
               source={require("../../assets/postImg.png")}
@@ -33,12 +38,7 @@ export default function PostPage() {
         <View style={styles.about}>
           <Text style={styles.aboutTitle}>About</Text>
           <View style={styles.aboutTextWrapper}>
-            <Text style={styles.aboutText}>What is Lorem Ipsum?</Text>
-            <Text style={styles.aboutText}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley{" "}
-            </Text>
+            <Text style={styles.aboutText}>{post.body}</Text>
           </View>
         </View>
 
@@ -81,7 +81,10 @@ export default function PostPage() {
         </View>
       </ScrollView>
       <View style={styles.postButtonWrapper}>
-        <ButtonComponent text="Back" />
+        <ButtonComponent
+          text="Back"
+          onPress={() => navigation.navigate("Home")}
+        />
       </View>
     </>
   );
@@ -111,6 +114,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   postTitle: {
+    width: "90%",
+    justifyContent: "center",
+    textAlign: "center",
+
     fontSize: 28,
     fontWeight: "600",
     color: "rgb(6, 7, 10)",

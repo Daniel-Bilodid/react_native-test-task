@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 
 import NavComponent from "../navComponent/NavComponent";
 import PostsComponent from "../postsComponent/PostsComponent";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchPosts } from "../../store/postSlice";
+import { getPosts } from "../../api/posts";
 
-export default function HomePage() {
+export default function HomePage({ navigation }) {
   const user = useSelector((state) => state.auth.user);
+
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts.items);
+  const loading = useSelector((state) => state.posts.loading);
+  const error = useSelector((state) => state.posts.error);
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, []);
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error: {error}</Text>;
   return (
     <>
       <ScrollView style={styles.container}>
@@ -90,9 +102,9 @@ export default function HomePage() {
             </View>
           </ScrollView>
         </View>
-        <PostsComponent />
+        <PostsComponent posts={posts} navigation={navigation} />
       </ScrollView>
-      <NavComponent />
+      <NavComponent navigation={navigation} />
     </>
   );
 }

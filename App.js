@@ -12,6 +12,7 @@ import PinCodeScreen from "./components/pinCode/PinCode";
 import HomePage from "./components/homePage/HomePage";
 import PostPage from "./components/postPage/PostPage";
 import InitAuth from "./components/InitAuth/InitAuth";
+import PostSearchPage from "./components/postSearchPage/PostSearchPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,7 @@ function AppNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomePage} />
       <Stack.Screen name="Post" component={PostPage} />
+      <Stack.Screen name="PostSearch" component={PostSearchPage} />
     </Stack.Navigator>
   );
 }

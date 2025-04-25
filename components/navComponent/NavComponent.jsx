@@ -21,7 +21,7 @@ export default function NavComponent({ navigation }) {
           <Text>Portfolio</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Search")}
+          onPress={() => navigation.navigate("PostSearch")}
           style={styles.iconWrapper}
         >
           <Icon name="magnify" size={28} />
