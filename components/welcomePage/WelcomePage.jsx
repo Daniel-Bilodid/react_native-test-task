@@ -43,8 +43,7 @@ export default function WelcomePage({ navigation }) {
           title="Sign In"
           color="rgb(250, 138, 52);"
           onPress={() => navigation.navigate("SignIn")}
-        />{" "}
-        // need to add styles here
+        />
         <ButtonComponent
           text="Sign Up"
           onPress={() => navigation.navigate("SignUp")}

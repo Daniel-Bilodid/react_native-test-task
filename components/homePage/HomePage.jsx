@@ -25,8 +25,8 @@ export default function HomePage({ navigation }) {
         <View style={styles.header}>
           <Text style={styles.headerTitle}>{t("headerName")}</Text>
           <Text style={styles.headerTitleName}>
-            {user.firstName}
-            {user.lastName}
+            <Text>{user.firstName} </Text>
+            <Text>{user.lastName}</Text>
           </Text>
         </View>
 
@@ -62,7 +62,7 @@ export default function HomePage({ navigation }) {
                 <View style={styles.iconWrapper}>
                   <View style={styles.circle} />
                   <Image
-                    source={require("../../assets/icons/Eye.png")}
+                    source={require("../../assets/icons/link.png")}
                     style={styles.startImg}
                   />
                 </View>
@@ -84,7 +84,7 @@ export default function HomePage({ navigation }) {
                 <View style={styles.iconWrapper}>
                   <View style={styles.circle} />
                   <Image
-                    source={require("../../assets/icons/Eye.png")}
+                    source={require("../../assets/icons/link.png")}
                     style={styles.startImg}
                   />
                 </View>

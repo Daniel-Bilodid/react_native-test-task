@@ -26,12 +26,10 @@ export default function SignInComponent({ navigation }) {
   const dispatch = useDispatch();
 
   async function onSubmit({ email, password }) {
-    console.log("🔥 onSubmit called with", email, password);
     try {
       const username = email.split("@")[0];
 
       const { data: res } = await loginUser({ username, password });
-      console.log("✅ API login response:", res);
 
       await SecureStore.setItemAsync("userId", res.id.toString());
       await SecureStore.setItemAsync("token", res.accessToken);
@@ -65,7 +63,6 @@ export default function SignInComponent({ navigation }) {
 
           <View style={styles.divider}></View>
 
-          {/* Email */}
           <Text style={styles.inputLabel}>Email</Text>
           <Controller
             control={control}
@@ -78,26 +75,28 @@ export default function SignInComponent({ navigation }) {
               },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={[
-                  {
-                    borderColor: errors.email ? "red" : "rgb(206, 213, 224)",
-                  },
-                  styles.inputElement,
-                ]}
-                placeholder="Enter your email"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-              />
+              <View style={styles.inputElementWrapper}>
+                <TextInput
+                  style={[
+                    {
+                      borderColor: errors.email ? "red" : "rgb(206, 213, 224)",
+                    },
+                    styles.inputElement,
+                  ]}
+                  placeholder="Enter your email"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
             )}
           />
           {errors.email && (
             <Text style={{ color: "red" }}>{errors.email.message}</Text>
           )}
-          {/* Password */}
+
           <Text style={styles.inputLabel}>Password</Text>
           <Controller
             control={control}
@@ -146,6 +145,13 @@ export default function SignInComponent({ navigation }) {
 
           <View style={{ marginTop: 20 }}>
             <ButtonComponent text="Continue" onPress={handleSubmit(onSubmit)} />
+
+            <TouchableOpacity
+              style={styles.createAccountWrapper}
+              onPress={() => navigation.navigate("SignUp")}
+            >
+              <Text style={styles.createAccount}>Create Account</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -215,14 +221,27 @@ const styles = StyleSheet.create({
     borderWidth: 1,
 
     borderRadius: 16,
+
     padding: 20,
   },
   inputElementWrapper: {
     position: "relative",
+    marginLeft: 16,
+    marginRight: 16,
   },
   inputElementIcon: {
     position: "absolute",
     top: 16,
     right: 16,
+  },
+  createAccount: {
+    color: "rgb(250, 138, 52)",
+    fontSize: 15,
+    fontWeight: 500,
+    lineHeight: 24,
+  },
+  createAccountWrapper: {
+    marginTop: 16,
+    alignItems: "center",
   },
 });
