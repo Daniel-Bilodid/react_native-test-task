@@ -11,9 +11,11 @@ import * as SecureStore from "expo-secure-store";
 import { useDispatch } from "react-redux";
 import { clearAuth } from "../../store/authSlice";
 import { persistor } from "../../store";
+import { useTranslation } from "react-i18next";
 
 export default function LogoutButtonComponent({ navigation }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onLogout = async () => {
     try {
@@ -37,7 +39,7 @@ export default function LogoutButtonComponent({ navigation }) {
     <TouchableOpacity style={styles.settingsSettingBody} onPress={onLogout}>
       <View style={styles.settingsWrapper}>
         <Image source={require("../../assets/icons/logout.png")} />
-        <Text style={styles.settingsTitle}>Log Out</Text>
+        <Text style={styles.settingsTitle}>{t("logOut")}</Text>
       </View>
 
       <Image source={require("../../assets/icons/arrowRightGray.png")} />

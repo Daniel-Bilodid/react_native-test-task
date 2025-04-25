@@ -17,6 +17,7 @@
     "axios-auth-refresh": "^3.3.6",
     "expo": "~52.0.46",
     "expo-local-authentication": "~15.0.2",
+    "expo-localization": "~16.0.1",
     "expo-secure-store": "~14.0.1",
     "expo-status-bar": "~2.0.1",
     "i18next": "^25.0.1",

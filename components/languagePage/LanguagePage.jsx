@@ -7,23 +7,18 @@ import NavComponent from "../navComponent/NavComponent";
 import { setLanguage } from "../../store/settingsSlice";
 
 export default function LanguagePage({ navigation }) {
-  const { i18n, t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
-  // Читаем язык из Redux
   const lang = useSelector((state) => state.settings.language);
 
-  // При первом рендере ставим i18n в значение из стора
   useEffect(() => {
     if (lang && i18n.language !== lang) {
       i18n.changeLanguage(lang);
     }
   }, [lang, i18n]);
 
-  // Обработчик переключения
   const onSelect = (lng) => {
-    // Сначала меняем i18n
     i18n.changeLanguage(lng);
-    // А потом сохраняем в Redux
     dispatch(setLanguage(lng));
   };
 
@@ -31,9 +26,7 @@ export default function LanguagePage({ navigation }) {
     <>
       <View style={styles.container}>
         <BackButton navigation={navigation} screen="Profile" />
-
         <Text style={styles.languageTitle}>{t("Language")}</Text>
-
         <TouchableOpacity
           style={styles.languageBody}
           onPress={() => onSelect("en")}
@@ -45,7 +38,6 @@ export default function LanguagePage({ navigation }) {
             <Text style={styles.languageItemTitle}>{t("English")}</Text>
           </View>
         </TouchableOpacity>
-
         <TouchableOpacity
           style={styles.languageBody}
           onPress={() => onSelect("ar")}
@@ -58,7 +50,6 @@ export default function LanguagePage({ navigation }) {
           </View>
         </TouchableOpacity>
       </View>
-
       <NavComponent navigation={navigation} />
     </>
   );

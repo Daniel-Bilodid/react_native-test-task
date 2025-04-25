@@ -1,3 +1,5 @@
+import "./utils/i18n";
+
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Provider, useSelector } from "react-redux";

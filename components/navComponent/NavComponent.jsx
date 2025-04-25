@@ -1,8 +1,11 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useTranslation } from "react-i18next";
 
 export default function NavComponent({ navigation }) {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
       <View style={styles.navList}>
@@ -11,28 +14,28 @@ export default function NavComponent({ navigation }) {
           style={styles.iconWrapper}
         >
           <Icon name="home-outline" size={28} />
-          <Text>Home</Text>
+          <Text>{t("navHome")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("Portfolio")}
           style={styles.iconWrapper}
         >
           <Icon name="briefcase-outline" size={28} />
-          <Text>Portfolio</Text>
+          <Text>{t("navPortfolio")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("PostSearch")}
           style={styles.iconWrapper}
         >
           <Icon name="magnify" size={28} />
-          <Text>Search</Text>
+          <Text>{t("navSearch")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("Profile")}
           style={styles.iconWrapper}
         >
           <Icon name="account-circle-outline" size={28} />
-          <Text>Profile</Text>
+          <Text>{t("navProfile")}</Text>
         </TouchableOpacity>
       </View>
     </View>

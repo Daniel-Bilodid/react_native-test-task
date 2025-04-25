@@ -5,10 +5,11 @@ import NavComponent from "../navComponent/NavComponent";
 import PostsComponent from "../postsComponent/PostsComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "../../store/postSlice";
+import { useTranslation } from "react-i18next";
 
 export default function HomePage({ navigation }) {
   const user = useSelector((state) => state.auth.user);
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.items);
   const loading = useSelector((state) => state.posts.loading);
@@ -22,7 +23,7 @@ export default function HomePage({ navigation }) {
     <>
       <ScrollView style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Your name</Text>
+          <Text style={styles.headerTitle}>{t("headerName")}</Text>
           <Text style={styles.headerTitleName}>
             {user.firstName}
             {user.lastName}
@@ -31,10 +32,10 @@ export default function HomePage({ navigation }) {
 
         <View style={styles.task}>
           <View>
-            <Text style={styles.taskTitle}>Test task</Text>
-            <Text style={styles.taskDescr}>Lorem ipsum</Text>
+            <Text style={styles.taskTitle}>{t("taskTitle")}</Text>
+            <Text style={styles.taskDescr}>{t("taskDescription")}</Text>
             <View style={styles.taskButtonWrapper}>
-              <Text style={styles.taskButton}>Go to call</Text>
+              <Text style={styles.taskButton}>{t("goToCall")}</Text>
               <Image
                 style={styles.taskButtonArrow}
                 source={require("../../assets/icons/arrowRight.png")}
@@ -50,7 +51,7 @@ export default function HomePage({ navigation }) {
         </View>
 
         <View style={styles.start}>
-          <Text style={styles.startTitle}>Before you Start</Text>
+          <Text style={styles.startTitle}>{t("beforeYouStart")}</Text>
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -66,11 +67,11 @@ export default function HomePage({ navigation }) {
                   />
                 </View>
 
-                <Text style={styles.startDescr}>Link you Bank Account</Text>
+                <Text style={styles.startDescr}>{t("linkBankAccount")}</Text>
               </View>
 
               <View style={styles.startBtnWrapper}>
-                <Text style={styles.startText}>2 steps</Text>
+                <Text style={styles.startText}>{t("twoSteps")}</Text>
                 <Image
                   style={styles.arrowImg}
                   source={require("../../assets/icons/arrowDif.png")}
@@ -88,11 +89,11 @@ export default function HomePage({ navigation }) {
                   />
                 </View>
 
-                <Text style={styles.startDescr}>Link you Bank Account</Text>
+                <Text style={styles.startDescr}>{t("linkBankAccount")}</Text>
               </View>
 
               <View style={styles.startBtnWrapper}>
-                <Text style={styles.startText}>2 steps</Text>
+                <Text style={styles.startText}>{t("twoSteps")}</Text>
                 <Image
                   style={styles.arrowImg}
                   source={require("../../assets/icons/arrowDif.png")}
