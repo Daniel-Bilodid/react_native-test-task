@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from "react-native";
 import * as SecureStore from "expo-secure-store";
+import * as LocalAuthentication from "expo-local-authentication";
 import { useDispatch, useSelector } from "react-redux";
 import { setPin } from "../../store/authSlice";
 import ButtonComponent from "../../ui/ButtonComponent";
@@ -25,12 +26,28 @@ export default function PinCodeScreen() {
     (async () => {
       const storedPin = await SecureStore.getItemAsync("PIN");
       setHasPin(!!storedPin);
+
+      if (storedPin) {
+        const compatible = await LocalAuthentication.hasHardwareAsync();
+        const enrolled = await LocalAuthentication.isEnrolledAsync();
+        if (compatible && enrolled) {
+          const result = await LocalAuthentication.authenticateAsync({
+            promptMessage: "Log with biometrics",
+            disableDeviceFallback: true,
+            fallbackLabel: "",
+          });
+          if (result.success) {
+            dispatch(setPin(true));
+            return;
+          }
+        }
+      }
     })();
-  }, []);
+  }, [dispatch]);
 
   const handleCompletePin = async (value) => {
-    if (hasPin) {
-      const storedPin = await SecureStore.getItemAsync("PIN");
+    const storedPin = await SecureStore.getItemAsync("PIN");
+    if (storedPin) {
       if (value === storedPin) {
         dispatch(setPin(true));
       } else {
@@ -46,7 +63,6 @@ export default function PinCodeScreen() {
   const onPressKey = (digit) => {
     if (pin.length < 5) setPinState((prev) => [...prev, digit]);
   };
-
   const onBackspace = () => {
     if (pin.length > 0) setPinState((prev) => prev.slice(0, -1));
   };
@@ -120,13 +136,12 @@ export default function PinCodeScreen() {
         <ButtonComponent
           text={"Continue"}
           onPress={() => handleCompletePin(pin.join(""))}
-          disabled={pin.length !== 6}
+          disabled={pin.length !== 5}
         />
       </View>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

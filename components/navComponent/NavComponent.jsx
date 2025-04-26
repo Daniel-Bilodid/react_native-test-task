@@ -21,8 +21,13 @@ export default function NavComponent() {
     <View style={styles.container}>
       <View style={styles.navList}>
         {tabs.map((tab) => {
-          const isFocused = currentRoute === tab.name;
+          const isFocused =
+            currentRoute === tab.name ||
+            (tab.name === "Profile" && currentRoute === "Language");
+          const isLanguagePage =
+            currentRoute === "Language" && tab.name === "Profile";
           const color = isFocused ? "rgb(250, 138, 52)" : "gray";
+          const iconName = isLanguagePage ? "cog-outline" : tab.icon;
 
           return (
             <TouchableOpacity
@@ -30,7 +35,7 @@ export default function NavComponent() {
               onPress={() => navigation.navigate(tab.name)}
               style={styles.iconWrapper}
             >
-              <Icon name={tab.icon} size={28} color={color} />
+              <Icon name={iconName} size={28} color={color} />
               <Text style={{ color, marginTop: 4 }}>{tab.label}</Text>
             </TouchableOpacity>
           );

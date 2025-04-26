@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 500,
     lineHeight: 22,
-    textTransform: "capitalize",
   },
   postsCardDescr: {
     color: "rgb(65, 65, 65)",
