@@ -14,31 +14,43 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import * as SecureStore from "expo-secure-store";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/authSlice";
-import { registerUser } from "../../api/auth";
+import { registerUser, loginUser } from "../../api/auth";
 
 export default function SignUpComponent({ navigation }) {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { name: "", email: "", password: "" } });
+  } = useForm({
+    defaultValues: { name: "", email: "", password: "" },
+  });
   const dispatch = useDispatch();
-  const [showPassword, setShowPassword] = useState(false);
+
   const onSubmit = async (data) => {
     try {
-      const res = await registerUser(data);
-      const { id, token } = res.data;
+      await registerUser(data);
 
-      const creds = { user: res.data, token };
+      const username = data.email.split("@")[0];
+      const { data: user } = await loginUser({
+        username,
+        password: data.password,
+      });
+      const token = user.accessToken;
+
+      const creds = { user, token };
       await SecureStore.setItemAsync("userCredentials", JSON.stringify(creds));
-      await SecureStore.setItemAsync("pinSet", "false");
 
       dispatch(setCredentials(creds));
+      navigation.replace("PinCode");
     } catch (err) {
       console.warn("Registration error", err);
+      Alert.alert(
+        "Error",
+        err.response?.data?.message || err.message || "Try Again"
+      );
     }
   };
-
   return (
     <>
       <View style={styles.container}>
@@ -118,7 +130,7 @@ export default function SignUpComponent({ navigation }) {
             {errors.email && (
               <Text style={{ color: "red" }}>{errors.email.message}</Text>
             )}
-            {/* Password */}
+
             <Text style={styles.inputLabel}>Password</Text>
             <Controller
               control={control}
@@ -126,8 +138,12 @@ export default function SignUpComponent({ navigation }) {
               rules={{
                 required: "Password required",
                 minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                maxLength: {
+                  value: 64,
+                  message: "Password can’t be more than 64 characters",
                 },
               }}
               render={({ field: { onChange, onBlur, value } }) => (

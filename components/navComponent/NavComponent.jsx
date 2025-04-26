@@ -2,41 +2,39 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-export default function NavComponent({ navigation }) {
+export default function NavComponent() {
   const { t } = useTranslation();
+  const navigation = useNavigation();
+  const route = useRoute();
+  const currentRoute = route.name;
+
+  const tabs = [
+    { name: "Home", icon: "home-outline", label: t("navHome") },
+    { name: "Portfolio", icon: "briefcase-outline", label: t("navPortfolio") },
+    { name: "PostSearch", icon: "magnify", label: t("navSearch") },
+    { name: "Profile", icon: "account-circle-outline", label: t("navProfile") },
+  ];
 
   return (
     <View style={styles.container}>
       <View style={styles.navList}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
-          style={styles.iconWrapper}
-        >
-          <Icon name="home-outline" size={28} />
-          <Text>{t("navHome")}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Portfolio")}
-          style={styles.iconWrapper}
-        >
-          <Icon name="briefcase-outline" size={28} />
-          <Text>{t("navPortfolio")}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("PostSearch")}
-          style={styles.iconWrapper}
-        >
-          <Icon name="magnify" size={28} />
-          <Text>{t("navSearch")}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Profile")}
-          style={styles.iconWrapper}
-        >
-          <Icon name="account-circle-outline" size={28} />
-          <Text>{t("navProfile")}</Text>
-        </TouchableOpacity>
+        {tabs.map((tab) => {
+          const isFocused = currentRoute === tab.name;
+          const color = isFocused ? "rgb(250, 138, 52)" : "gray";
+
+          return (
+            <TouchableOpacity
+              key={tab.name}
+              onPress={() => navigation.navigate(tab.name)}
+              style={styles.iconWrapper}
+            >
+              <Icon name={tab.icon} size={28} color={color} />
+              <Text style={{ color, marginTop: 4 }}>{tab.label}</Text>
+            </TouchableOpacity>
+          );
+        })}
       </View>
     </View>
   );

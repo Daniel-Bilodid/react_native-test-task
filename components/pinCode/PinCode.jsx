@@ -55,7 +55,7 @@ export default function PinCodeScreen() {
 
   return (
     <View style={styles.container}>
-      {user && (
+      {hasPin && user && (
         <View style={styles.userInfo}>
           <View style={styles.userTitleIcon}>
             <Image source={require("../../assets/icons/profileLogin.png")} />
@@ -66,11 +66,19 @@ export default function PinCodeScreen() {
           </TouchableOpacity>
         </View>
       )}
+      {!hasPin && (
+        <View style={styles.userInfo}>
+          <View style={styles.userTitleIcon}>
+            <Image source={require("../../assets/icons/phone.png")} />
+          </View>
+          <Text style={styles.createPinCode}>Create a Pin code</Text>
+        </View>
+      )}
       <Text style={styles.title}>
-        {hasPin ? "Enter a 6 digit PIN" : "Set a 6 digit PIN"}
+        {hasPin ? "Enter a 5 digit PIN" : "Set a 5 digit PIN"}
       </Text>
       <View style={styles.pinDisplay}>
-        {Array.from({ length: 6 }).map((_, i) => (
+        {Array.from({ length: 5 }).map((_, i) => (
           <View
             key={i}
             style={[styles.dot, pin.length > i ? styles.filledDot : null]}
@@ -204,5 +212,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 98,
     marginBottom: 20,
+  },
+  createPinCode: {
+    color: "rgb(6, 7, 10)",
+    fontSize: 15,
+    fontWeight: 500,
+    lineHeight: 24,
+    marginTop: 8,
+    marginBottom: 38,
   },
 });
