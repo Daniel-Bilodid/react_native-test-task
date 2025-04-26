@@ -44,7 +44,7 @@ export default function PinCodeScreen() {
   };
 
   const onPressKey = (digit) => {
-    if (pin.length < 6) setPinState((prev) => [...prev, digit]);
+    if (pin.length < 5) setPinState((prev) => [...prev, digit]);
   };
 
   const onBackspace = () => {
